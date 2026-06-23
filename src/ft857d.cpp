@@ -162,8 +162,10 @@ void ft857d::check() {
     // first check if we have at least 5 bytes waiting on the buffer
 //    uint8_t i = Serial.available();
     uint8_t i = serialDataAvail(serial_fd);
-    if (i != 0) {
-        printf(" %d %s", i, serialGetchar(serial_fd));
+    if (i > 0) {
+        printf(" %d ", i);
+        int j = serialGetchar(serial_fd);
+        printf(" %d-%s", j, j);
         return;
     }
     if (i < 5) return;

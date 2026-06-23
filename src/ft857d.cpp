@@ -163,8 +163,8 @@ void ft857d::check() {
 //    uint8_t i = Serial.available();
     uint8_t i = serialDataAvail(serial_fd);
     if (i != 0) {
-        printf(" %d", i);
-//        return;
+        printf(" %d %s", i, serialGetchar(serial_fd));
+        return;
     }
     if (i < 5) return;
 

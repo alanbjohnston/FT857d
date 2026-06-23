@@ -178,7 +178,8 @@ void ft857d::check() {
     for (i=0; i<5; i++) {
 //        nullPad[i] = Serial.read();
         sleep(1);
-        nullPad[i] = (char) serialGetchar(serial_fd);
+//        nullPad[i] = (char) serialGetchar(serial_fd);
+        nullPad[i] = serialGetchar(serial_fd);
         printf("%s", nullPad[i]);
         fflush(stdout);
     }

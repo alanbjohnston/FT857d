@@ -36,7 +36,8 @@
  * your software with 57600 @ 8N1 and enjoy
  */
 
-#include <ft857d.h>
+#include "../../src/ft857d.h"
+#include <stdio.h>
 
 ft857d radio = ft857d();
 

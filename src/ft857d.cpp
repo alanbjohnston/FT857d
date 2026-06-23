@@ -5,7 +5,7 @@
  * CAT point of view, then you can talk with your sketch from the PC like
  * if it was a real radio via CAT commands; to command a DDS for example.
  *
- * This work was a need from my side for the arduino-arcs project
+ * This work was a need from my side for the arduino-arcs profject
  * see it here https://github.com/pavelmc/arduino-arcs
  *
  * This code has been built with the review of various sources:
@@ -177,7 +177,7 @@ void ft857d::check() {
     // if you got here then there is at least 5 bytes waiting: get it.
     for (i=0; i<5; i++) {
 //        nullPad[i] = Serial.read();
-        sleep(1)
+        sleep(1);
         nullPad[i] = (char) serialGetchar(serial_fd);
         printf("%s", nullPad[i]);
         fflush(stdout);

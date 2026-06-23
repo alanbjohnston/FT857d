@@ -74,7 +74,7 @@ void catGoToggleVFOs() {
 
     #if defined (DEBUG)
     // debug
-     printf("VFO A active?: %d\n", vfoAActive");
+     printf("VFO A active?: %d\n", vfoAActive);
     #endif
 }
 

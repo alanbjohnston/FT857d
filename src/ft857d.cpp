@@ -45,7 +45,8 @@ static FuncPtrVoidLong emptyL[1];
 static FuncPtrToggles toggle[1];
 static FuncPtrByte fbyte[1];
 static FuncPtrLong longf[1];
-static char serial_port[] = "/dev/ttyAMA0";
+//static char serial_port[] = "/dev/ttyAMA0";
+static char serial_port[] = "/tmp/vttyB";
 int serial_fd;
 
 /*

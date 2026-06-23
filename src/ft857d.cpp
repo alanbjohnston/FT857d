@@ -31,7 +31,9 @@
  *
  * **************************************************************************/
 
-#include "Arduino.h"
+//#include "Arduino.h"
+#include <wiringPi.h>
+#include <wiringSerial.h>
 #include "ft857d.h"
 
 // function work vars, must be static & volatile?
@@ -41,14 +43,25 @@ static FuncPtrVoidLong emptyL[1];
 static FuncPtrToggles toggle[1];
 static FuncPtrByte fbyte[1];
 static FuncPtrLong longf[1];
+static serial_port[] = "/dev/ttyAMA0";
+FILE *serial_fd;
 
 /*
  * Contructor, simple constructor, it initiates the serial port in the
  * default mode for the radio: 9600 @ 8N2
  */
 void ft857d::begin() {
-    Serial.begin(9600, SERIAL_8N2);
-    Serial.flush();
+//    Serial.begin(9600, SERIAL_8N2);
+//    Serial.flush();
+
+    printf("Opening serial\n");
+    if ((serial_fd = serialOpen(serial_port, 9600)) >= 0) {  // was 9600
+      printf("Serial opened!\n");
+      serialFlush (serial_fd); 
+    } else {
+      printf("Serial error!\n");	 
+    }    
+
 }
 
 // Alternative initializer with a custom baudrate and mode
@@ -60,8 +73,16 @@ void ft857d::begin(long br, int mode) {
      *  SERIAL_5E2; SERIAL_6E2; SERIAL_7E2; SERIAL_8E2; SERIAL_5O1; SERIAL_6O1;
      *  SERIAL_7O1; SERIAL_8O1; SERIAL_5O2; SERIAL_6O2; SERIAL_7O2; SERIAL_8O2
      */
-    Serial.begin(br, mode);
-    Serial.flush();
+//    Serial.begin(br, mode);
+//    Serial.flush();
+    printf("Opening serial\n");
+    if ((serial_fd = serialOpen(serial_port, br)) >= 0) {  // was 9600
+      printf("Serial opened!\n");
+      serialFlush(serial_fd); 
+    } else {
+      printf("Serial error!\n");	 
+    }    
+
 }
 
 /*
@@ -135,12 +156,14 @@ void ft857d::check() {
     if (!enabled) return;
 
     // first check if we have at least 5 bytes waiting on the buffer
-    byte i = Serial.available();
+//    byte i = Serial.available();
+    byte i = serialDataAvail(uart_fd);
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.
     for (i=0; i<5; i++) {
-        nullPad[i] = Serial.read();
+//        nullPad[i] = Serial.read();
+        nullPad[i] = (char) serialGetchar(uart_fd);
     }
 
     // now chek for the command in the last byte
@@ -148,19 +171,22 @@ void ft857d::check() {
         case CAT_PTT_ON:
             if (toggle[0]) {
                 toggle[0](true);
-                Serial.write(ACK);
+//                Serial.write(ACK);
+                serialPutchar(serial_fd, ACK);
             }
             break;
         case CAT_PTT_OFF:
             if (toggle[0]) {
                 toggle[0](false);
-                Serial.write(ACK);
+//                Serial.write(ACK);
+                serialPutchar(serial_fd, ACK);
             }
             break;
         case CAT_VFO_AB:
             if (empty[0]) {
                 empty[0]();
-                Serial.write(ACK);
+//                Serial.write(ACK);
+                serialPutchar(serial_fd, ACK);
             }
             break;
         case CAT_FREQ_SET:
@@ -172,7 +198,8 @@ void ft857d::check() {
         case CAT_MODE_SET:
             if (fbyte[0]) {
                 fbyte[0](nullPad[0]);
-                Serial.write(ACK);
+//                Serial.write(ACK);
+                serialPutchar(serial_fd, ACK);
             }
             break;
         case CAT_RX_FREQ_CMD:
@@ -188,7 +215,8 @@ void ft857d::check() {
             if (emptyB[2]) sendTxStatus(); // without ACK
             break;
         default:
-            Serial.write(ACK);
+ //           Serial.write(ACK);
+            serialPutchar(serial_fd, ACK);
             break;
     }
 }
@@ -291,7 +319,9 @@ void ft857d::npadClear() {
 // sent the data to the PC
 void ft857d::sent(byte amount) {
     // sent the nullpad content
-    for (byte i=0; i<amount; i++) Serial.write(nullPad[i]);
+//    for (byte i=0; i<amount; i++) Serial.write(nullPad[i]);
+    for (byte i=0; i<amount; i++) serialPutchar(serial_fd, nullPad[i]);
+
 }
 
 /*

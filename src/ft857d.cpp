@@ -45,7 +45,7 @@ static FuncPtrVoidLong emptyL[1];
 static FuncPtrToggles toggle[1];
 static FuncPtruint8_t fbyte[1];
 static FuncPtrLong longf[1];
-static serial_port[] = "/dev/ttyAMA0";
+static char serial_port[] = "/dev/ttyAMA0";
 FILE *serial_fd;
 
 /*
@@ -143,7 +143,7 @@ void ft857d::addCATFSet(void (*userFunc)(long)) {
  */
 
 // MODE SET
-void ft857d::addCATMSet(void (*userFunc)(byte)) {
+void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
     fbyte[0] = userFunc;
 }
 

@@ -202,7 +202,7 @@ void ft857d::check() {
         printf("*%s* ", nullPad[0]);
         printf("#%d# ", nullPad[0]);
         fflush(stdout);
-    
+/*    
         sleep(1);
 //        nullPad[i] = (char) serialGetchar(serial_fd);
         printf("avail: %d\n", serialDataAvail(serial_fd));
@@ -222,6 +222,7 @@ void ft857d::check() {
         printf("*%s* ", nullPad[2]);
         printf("#%d# ", nullPad[2]);
         fflush(stdout);
+   */ 
     return;
     
     // now chek for the command in the last byte

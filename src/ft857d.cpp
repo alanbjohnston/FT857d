@@ -164,7 +164,7 @@ void ft857d::check() {
     uint8_t i = serialDataAvail(serial_fd);
     if (i != 0) {
         printf(" %d", i);
-        return;
+//        return;
     }
     if (i < 5) return;
 
@@ -174,7 +174,8 @@ void ft857d::check() {
         nullPad[i] = (char) serialGetchar(serial_fd);
         printf("%s", nullPad[i]);
     }
-
+    return;
+    
     // now chek for the command in the last byte
     switch (nullPad[4]) {
         case CAT_PTT_ON:

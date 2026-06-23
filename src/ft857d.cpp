@@ -155,14 +155,15 @@ void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
 
  // check function
 void ft857d::check() {
-    printf("Checking...");
+//    printf("Checking...");
     // do nothing if it was disabled by software
     if (!enabled) return;
 
     // first check if we have at least 5 bytes waiting on the buffer
 //    uint8_t i = Serial.available();
     uint8_t i = serialDataAvail(serial_fd);
-    printf(" %d", i);
+    if (i != 0)
+        printf(" %d", i);
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.

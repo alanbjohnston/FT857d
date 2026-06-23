@@ -184,7 +184,8 @@ void setup() {
     radio.addCATTXStatus(catGetTXStatus);
 
     // now we activate the library
-    radio.begin(57600, SERIAL_8N1);
+//    radio.begin(57600, SERIAL_8N1);
+    radio.begin();
 
     #if defined (DEBUG)
     // serial welcome
@@ -193,7 +194,7 @@ void setup() {
 
 }
 
-void main() {
+int main() {
 
     setup();
     while(1)

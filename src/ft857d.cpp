@@ -43,7 +43,7 @@ static FuncPtrVoid empty[1];
 static FuncPtrVoidByte emptyB[3];
 static FuncPtrVoidLong emptyL[1];
 static FuncPtrToggles toggle[1];
-static FuncPtruint8_t fbyte[1];
+static FuncPtrByte fbyte[1];
 static FuncPtrLong longf[1];
 static char serial_port[] = "/dev/ttyAMA0";
 FILE *serial_fd;

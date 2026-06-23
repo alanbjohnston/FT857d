@@ -199,6 +199,6 @@ int main() {
     setup();
     while(1) {
         radio.check();
-        printf("Radio Checked ");
+//        printf("Radio Checked ");
     }
 }

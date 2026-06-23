@@ -33,7 +33,7 @@
 
 #ifndef ft857d_h
 #define ft857d_h
-
+#include <stdint.h>
 //#include "Arduino.h"
 
 /*

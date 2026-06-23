@@ -40,7 +40,7 @@
 
 // function work vars, must be static & volatile?
 static FuncPtrVoid empty[1];
-static FuncPtrVoiduint8_t emptyB[3];
+static FuncPtrVoidByte emptyB[3];
 static FuncPtrVoidLong emptyL[1];
 static FuncPtrToggles toggle[1];
 static FuncPtruint8_t fbyte[1];

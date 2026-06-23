@@ -157,7 +157,7 @@ void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
 
  // check function
 void ft857d::check() {
-//    printf("Checking...");
+    printf("Checking...");
     // do nothing if it was disabled by software
     if (!enabled) return;
 
@@ -176,6 +176,7 @@ void ft857d::check() {
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.
+/*    
     for (i=0; i<5; i++) {
 //        nullPad[i] = Serial.read();
         sleep(1);
@@ -190,6 +191,37 @@ void ft857d::check() {
         fflush(stdout);
         return;
     }
+   */ 
+
+        sleep(1);
+//        nullPad[i] = (char) serialGetchar(serial_fd);
+        printf("avail: %d\n", serialDataAvail(serial_fd));
+        fflush(stdout);    
+        printf("fd: %d\n", serial_fd);    
+        nullPad[0] = serialGetchar(serial_fd);
+        printf("*%s* ", nullPad[0]);
+        printf("#%d# ", nullPad[0]);
+        fflush(stdout);
+    
+        sleep(1);
+//        nullPad[i] = (char) serialGetchar(serial_fd);
+        printf("avail: %d\n", serialDataAvail(serial_fd));
+        fflush(stdout);    
+        printf("fd: %d\n", serial_fd);    
+        nullPad[1] = serialGetchar(serial_fd);
+        printf("*%s* ", nullPad[1]);
+        printf("#%d# ", nullPad[1]);
+        fflush(stdout);
+
+        sleep(1);
+//        nullPad[i] = (char) serialGetchar(serial_fd);
+        printf("avail: %d\n", serialDataAvail(serial_fd));
+        fflush(stdout);    
+        printf("fd: %d\n", serial_fd);    
+        nullPad[2] = serialGetchar(serial_fd);
+        printf("*%s* ", nullPad[2]);
+        printf("#%d# ", nullPad[2]);
+        fflush(stdout);
     return;
     
     // now chek for the command in the last byte

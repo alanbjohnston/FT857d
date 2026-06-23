@@ -110,7 +110,7 @@ class ft857d {
     void addCATPtt(void (*)(bool));
     void addCATAB(void (*)(void));
     void addCATFSet(void (*)(long));
-    void addCATMSet(void (*)(byte));
+    void addCATMSet(void (*)(uint8_t));
     void addCATGetFreq(long (*)(void));
     void addCATGetMode(uint8_t (*)(void));
     void addCATSMeter(uint8_t (*)(void));
@@ -130,7 +130,7 @@ class ft857d {
     void readEeprom(void);
     void npadClear(void);
     void sendTxStatus(void);
-    void sent(byte);
+    void sent(uint8_t);
     void fset(void);
 };
 

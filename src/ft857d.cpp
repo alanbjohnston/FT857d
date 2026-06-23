@@ -38,10 +38,10 @@
 
 // function work vars, must be static & volatile?
 static FuncPtrVoid empty[1];
-static FuncPtrVoidByte emptyB[3];
+static FuncPtrVoiduint8_t emptyB[3];
 static FuncPtrVoidLong emptyL[1];
 static FuncPtrToggles toggle[1];
-static FuncPtrByte fbyte[1];
+static FuncPtruint8_t fbyte[1];
 static FuncPtrLong longf[1];
 static serial_port[] = "/dev/ttyAMA0";
 FILE *serial_fd;
@@ -110,17 +110,17 @@ void ft857d::addCATGetFreq(long (*userFunc)(void)) {
 }
 
 // AUX: Get the mode of operation, the function must return the mode
-void ft857d::addCATGetMode(byte (*userFunc)(void)) {
+void ft857d::addCATGetMode(uint8_t (*userFunc)(void)) {
     emptyB[0] = userFunc;
 }
 
 // S meter
-void ft857d::addCATSMeter(byte (*userFunc)(void)) {
+void ft857d::addCATSMeter(uint8_t (*userFunc)(void)) {
     emptyB[1] = userFunc;
 }
 
 // TX status
-void ft857d::addCATTXStatus(byte (*userFunc)(void)) {
+void ft857d::addCATTXStatus(uint8_t (*userFunc)(void)) {
     emptyB[2] = userFunc;
 }
 
@@ -137,7 +137,7 @@ void ft857d::addCATFSet(void (*userFunc)(long)) {
 
 /*
  * Linking the function for the mode set, this expect a function that accepts a
- * byte that is the mode in the way the CAT is defined
+ * uint8_t that is the mode in the way the CAT is defined
  */
 
 // MODE SET
@@ -156,8 +156,8 @@ void ft857d::check() {
     if (!enabled) return;
 
     // first check if we have at least 5 bytes waiting on the buffer
-//    byte i = Serial.available();
-    byte i = serialDataAvail(uart_fd);
+//    uint8_t i = Serial.available();
+    uint8_t i = serialDataAvail(uart_fd);
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.
@@ -232,7 +232,7 @@ void ft857d::fset() {
 
 // send the TX status
 void ft857d::sendTxStatus() {
-    // just one byte with the format the CAT expect, see the exemple in the library
+    // just one uint8_t with the format the CAT expect, see the exemple in the library
 
     // get it
     nullPad[0] = emptyB[2]();
@@ -263,11 +263,11 @@ void ft857d::sendFreqMode() {
 void ft857d::readEeprom() {
     // This is to make hamlib happy, PC requested reading two bytes
     // we must answer with two bytes, we forge it as empty ones or...
-    // if the second byte in the request is 0x78 we have to send the first
+    // if the second uint8_t in the request is 0x78 we have to send the first
     // with the 5th bit set if the USB or zero if LSB.
 
     // mem zone to "read"
-    byte temp = nullPad[1];
+    uint8_t temp = nullPad[1];
 
     // clear the nullpad
     npadClear();
@@ -313,14 +313,14 @@ void ft857d::rxStatus() {
 // procedure to clear the nullpad
 void ft857d::npadClear() {
     // this is used to initialize the nullpad
-    for (byte i=0; i<5; i++) nullPad[i] = 0;
+    for (uint8_t i=0; i<5; i++) nullPad[i] = 0;
 }
 
 // sent the data to the PC
-void ft857d::sent(byte amount) {
+void ft857d::sent(uint8_t amount) {
     // sent the nullpad content
-//    for (byte i=0; i<amount; i++) Serial.write(nullPad[i]);
-    for (byte i=0; i<amount; i++) serialPutchar(serial_fd, nullPad[i]);
+//    for (uint8_t i=0; i<amount; i++) Serial.write(nullPad[i]);
+    for (uint8_t i=0; i<amount; i++) serialPutchar(serial_fd, nullPad[i]);
 
 }
 
@@ -356,7 +356,7 @@ void ft857d::to_bcd_be(long f) {
 void ft857d::from_bcd_be() {
     // {0x01,0x40,0x07,0x00,0x01} tunes to 14.070MHz
     freq = 0;
-    for (byte i=0; i<4; i++) {
+    for (uint8_t i=0; i<4; i++) {
         freq *= 10;
         freq += nullPad[i]>>4;
         freq *= 10;

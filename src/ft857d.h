@@ -118,7 +118,7 @@ class ft857d {
     bool enabled     = true;
 
  private:
-    uint8_t nullPad[5]     = {0,0,0,0,0};
+    uint8_t nullPad[6]     = {0,0,0,0,0};
     long freq           = 0;
     uint8_t ACK            = 0;
     void setFreq(void);

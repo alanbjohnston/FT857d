@@ -42,10 +42,10 @@ ft857d radio = ft857d();
 
 // variables
 long freq = 7110000;
-boolean ptt = false;
-boolean splitActive = false;
-boolean vfoAActive = true;
-byte mode = 0;
+bool ptt = false;
+bool splitActive = false;
+bool vfoAActive = true;
+uint8_t mode = 0;
 
 // radio modes
 #define MODE_LSB 00
@@ -56,14 +56,13 @@ byte mode = 0;
 //#define DEBUG true
 
 // function to run when we must put radio on TX/RX
-void catGoPtt(boolean pttf) {
+void catGoPtt(bool pttf) {
     // the var ptt follows the value passed, but you can do a few more thing here
     ptt = pttf;
 
     #if defined (DEBUG)
     // debug
-    Serial.print("PTT Status is: ");
-    Serial.println(ptt);
+    printf("PTT Status is: %d\n", ptt);
     #endif
 }
 
@@ -74,8 +73,7 @@ void catGoToggleVFOs() {
 
     #if defined (DEBUG)
     // debug
-    Serial.print("VFO A active?: ");
-    Serial.println(vfoAActive);
+     printf("VFO A active?: %d\n", vfoAActive");
     #endif
 }
 
@@ -86,20 +84,18 @@ void catSetFreq(long f) {
 
     #if defined (DEBUG)
     // debug
-    Serial.print("Active VFO freq is: ");
-    Serial.println(freq);
+    printf("Active VFO freq is: %d\n", freq);
     #endif
 }
 
 // function to set the mode from the cat command
-void catSetMode(byte m) {
+void catSetMode(uint8_t m) {
     // the var mode follows the value passed, but you can do a few more thing here
     mode = m;
 
     #if defined (DEBUG)
     // debug
-    Serial.print("Active VFO mode is: ");
-    Serial.println(mode);
+    printf("Active VFO mode is: %d\n", mode);
     #endif
 }
 
@@ -109,7 +105,7 @@ long catGetFreq() {
 
     #if defined (DEBUG)
     // debug
-    Serial.println("Asked for freq");
+   printf("Asked for freq\n");
     #endif
 
     // pass it away
@@ -117,12 +113,12 @@ long catGetFreq() {
 }
 
 // function to pass the mode to the cat library
-byte catGetMode() {
+uint8_t catGetMode() {
     // this must return the mode in the wat the CAT protocol expect it
 
     #if defined (DEBUG)
     // debug
-    Serial.println("Asked for mode");
+    printf("Asked for mode\n");
     #endif
 
     // pass it away
@@ -130,22 +126,22 @@ byte catGetMode() {
 }
 
 // function to pass the smeter reading in RX mode
-byte catGetSMeter() {
+uint8_t catGetSMeter() {
     // this must return a byte in with the 4 LSB are the S meter data
     // so this procedure must take care of convert your S meter and scale it
     // up to just 4 bits
 
     #if defined (DEBUG)
     // debug
-    Serial.println("Asked for S meter");
+    printf("Asked for S meter\n");
     #endif
 
     // pass it away (fixed here just for testing)
-    return byte(4);
+    return uint8_t(4);
 }
 
 // function to pass the TX status
-byte catGetTXStatus() {
+uint8_t catGetTXStatus() {
     /*
      * this must return a byte in wich the different bits means this:
      * 0b abcdefgh
@@ -161,12 +157,12 @@ byte catGetTXStatus() {
 
     #if defined (DEBUG)
     // debug
-    Serial.println("Asked for TX status");
+     printf("Asked for TX status\n");
     #endif
 
     // you have to craft the byte from your data, we will built it from
     // our data
-    byte r = 0;
+    uint8_t r = 0;
     // we fix the TX power to half scale (8)
     r = ptt<<7 + splitActive<<5 + 8;
 
@@ -190,11 +186,14 @@ void setup() {
 
     #if defined (DEBUG)
     // serial welcome
-    Serial.println("CAT Serial Test Ready");
+     printf("CAT Serial Test Ready\n");
     #endif
 
 }
 
-void loop() {
-    radio.check();
+void main() {
+
+    setup();
+    while(1)
+        radio.check();
 }

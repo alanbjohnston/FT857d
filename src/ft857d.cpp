@@ -185,8 +185,10 @@ void ft857d::check() {
         fflush(stdout);    
         printf("fd: %d\n", serial_fd);    
         nullPad[i] = serialGetchar(serial_fd);
-        printf("%s", nullPad[i]);
+        printf("*%s* ", nullPad[i]);
+        printf("#%d# ", nullPad[i]);
         fflush(stdout);
+        return;
     }
     return;
     

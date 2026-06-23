@@ -36,6 +36,7 @@
 #include <wiringSerial.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <time.h>
 #include "ft857d.h"
 
 // function work vars, must be static & volatile?
@@ -163,18 +164,22 @@ void ft857d::check() {
 //    uint8_t i = Serial.available();
     uint8_t i = serialDataAvail(serial_fd);
     if (i > 0) {
-        printf("** %d ", i);
+        printf(" %d ", i);
+        fflush(stdio);
+        sleep(1);
 //        int j = serialGetchar(serial_fd);
 //        printf(" %d-%s", j, j);
-        return;
+//        return;
     }
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.
     for (i=0; i<5; i++) {
 //        nullPad[i] = Serial.read();
+        sleep(1)
         nullPad[i] = (char) serialGetchar(serial_fd);
         printf("%s", nullPad[i]);
+        fflush(stdio);
     }
     return;
     

@@ -34,6 +34,7 @@
 //#include "Arduino.h"
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <stdio.h>
 #include "ft857d.h"
 
 // function work vars, must be static & volatile?
@@ -91,7 +92,7 @@ void ft857d::begin(long br, int mode) {
  */
 
 // PTT
-void ft857d::addCATPtt(void (*userFunc)(boolean)) {
+void ft857d::addCATPtt(void (*userFunc)(bool)) {
     toggle[0] = userFunc;
 }
 

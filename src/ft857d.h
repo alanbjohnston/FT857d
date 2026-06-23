@@ -34,7 +34,7 @@
 #ifndef ft857d_h
 #define ft857d_h
 
-#include "Arduino.h"
+//#include "Arduino.h"
 
 /*
  * CAT Command definition from VE3BUX library and more

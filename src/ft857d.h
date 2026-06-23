@@ -94,7 +94,7 @@ typedef void (*FuncPtrVoid)(void);
 typedef long (*FuncPtrVoidLong)(void);
 typedef uint8_t (*FuncPtrVoidByte)(void);
 typedef void (*FuncPtrToggles)(bool);
-typedef void (*FuncPtrByte)(byte);
+typedef void (*FuncPtrByte)(uint8_t);
 typedef void (*FuncPtrLong)(long);
 
 /*

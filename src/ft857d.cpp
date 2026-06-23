@@ -35,6 +35,7 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 #include <stdio.h>
+#include <stdint.h>
 #include "ft857d.h"
 
 // function work vars, must be static & volatile?

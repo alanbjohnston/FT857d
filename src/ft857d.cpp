@@ -46,7 +46,7 @@ static FuncPtrToggles toggle[1];
 static FuncPtrByte fbyte[1];
 static FuncPtrLong longf[1];
 static char serial_port[] = "/dev/ttyAMA0";
-FILE *serial_fd;
+int serial_fd;
 
 /*
  * Contructor, simple constructor, it initiates the serial port in the

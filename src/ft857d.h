@@ -92,7 +92,7 @@
 // defining the funtion type by params
 typedef void (*FuncPtrVoid)(void);
 typedef long (*FuncPtrVoidLong)(void);
-typedef uint_t (*FuncPtrVoidByte)(void);
+typedef uint8_t (*FuncPtrVoidByte)(void);
 typedef void (*FuncPtrToggles)(bool);
 typedef void (*FuncPtrByte)(byte);
 typedef void (*FuncPtrLong)(long);
@@ -112,15 +112,15 @@ class ft857d {
     void addCATFSet(void (*)(long));
     void addCATMSet(void (*)(byte));
     void addCATGetFreq(long (*)(void));
-    void addCATGetMode(uint_t (*)(void));
-    void addCATSMeter(uint_t (*)(void));
-    void addCATTXStatus(uint_t (*)(void));
+    void addCATGetMode(uint8_t (*)(void));
+    void addCATSMeter(uint8_t (*)(void));
+    void addCATTXStatus(uint8_t (*)(void));
     bool enabled     = true;
 
  private:
-    uint_t nullPad[5]     = {0,0,0,0,0};
+    uint8_t nullPad[5]     = {0,0,0,0,0};
     long freq           = 0;
-    uint_t ACK            = 0;
+    uint8_t ACK            = 0;
     void setFreq(void);
     void from_bcd_be(void);
     void to_bcd_be(long);

@@ -159,13 +159,13 @@ void ft857d::check() {
 
     // first check if we have at least 5 bytes waiting on the buffer
 //    uint8_t i = Serial.available();
-    uint8_t i = serialDataAvail(uart_fd);
+    uint8_t i = serialDataAvail(serial_fd);
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.
     for (i=0; i<5; i++) {
 //        nullPad[i] = Serial.read();
-        nullPad[i] = (char) serialGetchar(uart_fd);
+        nullPad[i] = (char) serialGetchar(serial_fd);
     }
 
     // now chek for the command in the last byte
@@ -194,7 +194,8 @@ void ft857d::check() {
         case CAT_FREQ_SET:
             if (longf[0]) {
                 fset();
-                Serial.write(ACK);
+//                Serial.write(ACK);
+                serialPutchar(serial_fd, ACK);                
             }
             break;
         case CAT_MODE_SET:

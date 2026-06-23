@@ -155,6 +155,7 @@ void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
 
  // check function
 void ft857d::check() {
+    printf("Checking...");
     // do nothing if it was disabled by software
     if (!enabled) return;
 

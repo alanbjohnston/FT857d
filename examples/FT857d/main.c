@@ -55,7 +55,7 @@ uint8_t mode = 0;
 #define MODE_CW 02
 
 // DEBUG flag, uncomment it if you want to test it by hand
-//#define DEBUG true
+#define DEBUG true
 
 // function to run when we must put radio on TX/RX
 void catGoPtt(bool pttf) {

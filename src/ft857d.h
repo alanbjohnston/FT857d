@@ -92,8 +92,8 @@
 // defining the funtion type by params
 typedef void (*FuncPtrVoid)(void);
 typedef long (*FuncPtrVoidLong)(void);
-typedef byte (*FuncPtrVoidByte)(void);
-typedef void (*FuncPtrToggles)(boolean);
+typedef uint_t (*FuncPtrVoidByte)(void);
+typedef void (*FuncPtrToggles)(bool);
 typedef void (*FuncPtrByte)(byte);
 typedef void (*FuncPtrLong)(long);
 
@@ -107,20 +107,20 @@ class ft857d {
     void begin(long baudrate, int mode); // custom baudrate and mode
     void check(); // periodic check for serial commands
     // the functions that links the lib with your code
-    void addCATPtt(void (*)(boolean));
+    void addCATPtt(void (*)(bool));
     void addCATAB(void (*)(void));
     void addCATFSet(void (*)(long));
     void addCATMSet(void (*)(byte));
     void addCATGetFreq(long (*)(void));
-    void addCATGetMode(byte (*)(void));
-    void addCATSMeter(byte (*)(void));
-    void addCATTXStatus(byte (*)(void));
-    boolean enabled     = true;
+    void addCATGetMode(uint_t (*)(void));
+    void addCATSMeter(uint_t (*)(void));
+    void addCATTXStatus(uint_t (*)(void));
+    bool enabled     = true;
 
  private:
-    byte nullPad[5]     = {0,0,0,0,0};
+    uint_t nullPad[5]     = {0,0,0,0,0};
     long freq           = 0;
-    byte ACK            = 0;
+    uint_t ACK            = 0;
     void setFreq(void);
     void from_bcd_be(void);
     void to_bcd_be(long);

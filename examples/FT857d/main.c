@@ -52,6 +52,7 @@ bool ptt = false;
 bool splitActive = false;
 bool vfoAActive = true;
 uint8_t mode = 0;
+FILE *file_ptr;
 
 // radio modes
 #define MODE_LSB 00

@@ -45,7 +45,8 @@
 ft857d radio = ft857d();
 
 // variables
-long freq = 7110000;
+//long freq = 7110000;
+long freq = 144890000;
 bool ptt = false;
 bool splitActive = false;
 bool vfoAActive = true;

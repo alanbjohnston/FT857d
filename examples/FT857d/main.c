@@ -193,6 +193,7 @@ void setup() {
     // serial welcome
      printf("CAT Serial Test Ready\n");
     #endif
+    sleep(1);
 
 }
 

@@ -159,7 +159,7 @@ void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
 void ft857d::check() {
     printf("Checking..");
     fflush(stdout);
-    sleep(1);
+//    sleep(1);
     // do nothing if it was disabled by software
     if (!enabled) return;
 
@@ -173,7 +173,7 @@ void ft857d::check() {
     if (i > 0) {
         printf(" %d ", i);
         fflush(stdout);
-        sleep(1);
+    //    sleep(1);
 //        int j = serialGetchar(serial_fd);
 //        printf(" %d-%s", j, j);
 //        return;
@@ -233,7 +233,7 @@ void ft857d::check() {
         printf("#%d# ", nullPad[2]);
         fflush(stdout);
    */ 
-    return;
+//    return;
     
     // now chek for the command in the last byte
     switch (nullPad[4]) {

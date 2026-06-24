@@ -46,7 +46,8 @@ ft857d radio = ft857d();
 
 // variables
 //long freq = 7110000;
-long freq = 144890000;
+long freqA = 144890000;
+long freqB = 434900000;
 bool ptt = false;
 bool splitActive = false;
 bool vfoAActive = true;
@@ -85,12 +86,24 @@ void catGoToggleVFOs() {
 // function to set a freq from CAT
 void catSetFreq(long f) {
     // the var freq follows the value passed, but you can do a few more thing here
-    freq = f;
-
-    #if defined (DEBUG)
+    if (vfoAActive) {
+        freqA = f;
+#if defined (DEBUG)
     // debug
-    printf("Active VFO freq is: %d\n", freq);
-    #endif
+        printf("VFO A freq is now: %d\n", freqA);
+#endif
+    } else {
+        freqB = f;
+#if defined (DEBUG)
+    // debug
+        printf("VFO B freq is now: %d\n", freqB);
+#endif        
+    }
+
+//    #if defined (DEBUG)
+    // debug
+//    printf("Active VFO freq is: %d\n", freq);
+ //   #endif
 }
 
 // function to set the mode from the cat command
@@ -107,11 +120,27 @@ void catSetMode(uint8_t m) {
 // function to pass the freq to the cat library
 long catGetFreq() {
     // this must return the freq as an unsigned long in Hz, you must prepare it before
-
+    long freq = 0;
+    
     #if defined (DEBUG)
     // debug
-   printf("Asked for freq\n");
+   printf("Asked for freq\n", freq);
     #endif
+
+
+    if (vfoAActive) {
+        freq = freqA;
+#if defined (DEBUG)
+    // debug
+        printf("Returned VFO A freq: %d\n", freqA);
+#endif
+    } else {
+        freq = freqB;
+#if defined (DEBUG)
+    // debug
+        printf("Returned VFO B freq: %d\n", freqB);
+#endif        
+    }
 
     // pass it away
     return freq;
@@ -123,7 +152,7 @@ uint8_t catGetMode() {
 
     #if defined (DEBUG)
     // debug
-    printf("Asked for mode\n");
+    printf("Asked for mode, returned %d\n", mode);
     #endif
 
     // pass it away

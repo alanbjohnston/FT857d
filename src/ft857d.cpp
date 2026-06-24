@@ -82,7 +82,7 @@ void ft857d::begin(long br, int mode) {
 //    Serial.flush();
     printf("Opening serial\n");
     if ((serial_fd = serialOpen(serial_port, br)) >= 0) {  // was 9600
-      printf("Serial opened!\n");
+      printf("Serial opened!!\n");
       serialFlush(serial_fd); 
     } else {
       printf("Serial error!\n");	 
@@ -158,6 +158,7 @@ void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
  // check function
 void ft857d::check() {
     printf("Checking...");
+    fflush(stdout);
     sleep(500);
     // do nothing if it was disabled by software
     if (!enabled) return;

@@ -39,6 +39,8 @@
 #include "../../src/ft857d.h"
 #include <stdio.h>
 #include <stdint.h>
+#include <time.h>
+#include <unistd.h>
 
 ft857d radio = ft857d();
 

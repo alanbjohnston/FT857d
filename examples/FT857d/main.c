@@ -170,6 +170,7 @@ uint8_t catGetTXStatus() {
     uint8_t r = 0;
 //    uint8_t r = 1;
     // we fix the TX power to half scale (8)
+    printf("Send: %x\n", (ptt==true)<<7 + (splitActive==true)<<5 + 8);
     r = ptt<<7 + splitActive<<5 + 8;
     printf("Sending %x \n",r);
 

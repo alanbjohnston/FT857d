@@ -169,15 +169,12 @@ void ft857d::check() {
     int i = serialDataAvail(serial_fd);
  //       printf(" %d ", i);
  //       fflush(stdout);
-    
+/*    
     if (i > 0) {
         printf(" %d ", i);
         fflush(stdout);
-    //    sleep(1);
-//        int j = serialGetchar(serial_fd);
-//        printf(" %d-%s", j, j);
-//        return;
     }
+ */   
     if (i < 5) return;
 
     // if you got here then there is at least 5 bytes waiting: get it.
@@ -185,7 +182,7 @@ void ft857d::check() {
     for (i=0; i<5; i++) {
 //        nullPad[i] = Serial.read();
         nullPad[i] = serialGetchar(serial_fd);
-        printf(".");
+//        printf(".");
         
 }
     /*  

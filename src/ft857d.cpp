@@ -157,7 +157,7 @@ void ft857d::addCATMSet(void (*userFunc)(uint8_t)) {
 
  // check function
 void ft857d::check() {
-    printf("Checking...");
+    printf("Checking..");
     fflush(stdout);
     sleep(1);
     // do nothing if it was disabled by software
@@ -167,6 +167,9 @@ void ft857d::check() {
 //    uint8_t i = Serial.available();
 //    uint8_t i = serialDataAvail(serial_fd);
     int i = serialDataAvail(serial_fd);
+        printf(" %d ", i);
+        fflush(stdout);
+    
     if (i > 0) {
         printf(" %d ", i);
         fflush(stdout);

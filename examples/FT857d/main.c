@@ -202,7 +202,7 @@ int main() {
     setup();
     while(1) {
         radio.check();
-        sleep(0.5);
+        sleep(1);
 //        printf("Radio Checked ");
     }
 }

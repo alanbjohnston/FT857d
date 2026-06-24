@@ -168,8 +168,10 @@ uint8_t catGetTXStatus() {
     // you have to craft the byte from your data, we will built it from
     // our data
     uint8_t r = 0;
+//    uint8_t r = 1;
     // we fix the TX power to half scale (8)
     r = ptt<<7 + splitActive<<5 + 8;
+    print("Sending %x \n",r);
 
     return r;
 }

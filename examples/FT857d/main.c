@@ -61,6 +61,20 @@ uint8_t mode = 0;
 // DEBUG flag, uncomment it if you want to test it by hand
 #define DEBUG true
 
+void update_frequency() {
+
+    file_ptr = fopen("doppler.txt", "w");
+
+    if (file_ptr == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    fprintf(file_ptr, "%d %d\n", freqA, freqB);
+
+    fclose(file_ptr);
+}
+
 // function to run when we must put radio on TX/RX
 void catGoPtt(bool pttf) {
     // the var ptt follows the value passed, but you can do a few more thing here
@@ -99,6 +113,8 @@ void catSetFreq(long f) {
         printf("VFO B freq is now: %d\n", freqB);
 #endif        
     }
+
+    update_frequency();
 
 //    #if defined (DEBUG)
     // debug

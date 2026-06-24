@@ -61,7 +61,7 @@ void ft857d::begin() {
 
     printf("Opening serial\n");
     if ((serial_fd = serialOpen(serial_port, 9600)) >= 0) {  // was 9600
-      printf("Serial opened!\n");
+      printf("Serial opened!!\n");
       serialFlush (serial_fd); 
     } else {
       printf("Serial error!\n");	 

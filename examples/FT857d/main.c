@@ -101,6 +101,12 @@ void catGoToggleVFOs() {
 // function to set a freq from CAT
 void catSetFreq(long f) {
     // the var freq follows the value passed, but you can do a few more thing here
+
+#if defined (DEBUG)
+    // debug
+    printf("Set frequency\n");
+#endif
+    
     if (vfoAActive) {
         freqA = f;
 #if defined (DEBUG)
@@ -117,10 +123,6 @@ void catSetFreq(long f) {
 
     update_frequency();
 
-//    #if defined (DEBUG)
-    // debug
-//    printf("Active VFO freq is: %d\n", freq);
- //   #endif
 }
 
 // function to set the mode from the cat command

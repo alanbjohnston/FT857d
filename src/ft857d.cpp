@@ -183,7 +183,8 @@ void ft857d::check() {
     // if you got here then there is at least 5 bytes waiting: get it.
   
     for (i=0; i<5; i++) {
-        nullPad[i] = Serial.read();
+//        nullPad[i] = Serial.read();
+        nullPad[i] = serialGetchar(serial_fd);
         printf(".");
         
 }

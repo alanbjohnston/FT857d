@@ -94,7 +94,10 @@ void catGoToggleVFOs() {
 
     #if defined (DEBUG)
     // debug
-     printf("VFO A active?: %d\n", vfoAActive);
+     if (vfoAActive)
+         printf("VFO A active\n");
+     else
+         printf("VFO B active\n");
     #endif
 }
 
@@ -244,9 +247,9 @@ void setup() {
 
     #if defined (DEBUG)
     // serial welcome
-     printf("CAT Serial Test Ready\n");
+     printf("FT857 emulation setup complete\n");
     #endif
-    sleep(1);
+//    sleep(1);
 
 }
 
@@ -255,7 +258,7 @@ int main() {
     setup();
     while(1) {
         radio.check();
-//        sleep(1);
+        sleep(0.1);
 //        printf("Radio Checked ");
     }
 }

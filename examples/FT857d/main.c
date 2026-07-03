@@ -64,7 +64,7 @@ FILE *file_ptr;
 
 void update_frequency() {
 
-    file_ptr = fopen("doppler.txt", "w");
+    file_ptr = fopen("/home/pi/CubeSatSim/frequency.txt", "w");
 
     if (file_ptr == NULL) {
         printf("Error opening file!\n");

@@ -36,6 +36,12 @@
  * your software with 57600 @ 8N1 and enjoy
  */
 
+/*
+ * converted to run on Raspberry Pi by Alan Johnston, KU2Y
+ * writes VFO A and B frequencies to file /home/pi/CubeSatSim/frequency.txt 
+ * checks to make sure in amateur radio 2m or 70cm band
+*/
+
 #include "../../src/ft857d.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -64,6 +70,7 @@ FILE *file_ptr;
 
 void update_frequency() {
 
+    int freq_A, freq_B;
     file_ptr = fopen("/home/pi/CubeSatSim/frequency.txt", "w");
 
     if (file_ptr == NULL) {
@@ -71,7 +78,28 @@ void update_frequency() {
         return;
     }
 
-    fprintf(file_ptr, "%d %d\n", freqA, freqB);
+	if (freqA > 450000000)
+		freq_A = 435200000;
+	else if ((freqA < 420000000) && (freqA > 148000000))
+		freq_A = 434700000;
+	else if (freqA < 144000000)
+		freq_A = 434600000;
+    else 
+        freq_A = freqA;
+
+    if (freqB > 450000000)
+		freq_B = 435200000;
+	else if ((freqB < 420000000) && (freqB > 148000000))
+		freq_B = 434700000;
+	else if (freqB < 144000000)
+		freq_B = 434600000;
+    else 
+        freq_B = freqB;
+    
+    if ((freqA != freq_A) || (freqB != freq_B))
+        printf("Frequency out of bounds error!\n");
+         
+    fprintf(file_ptr, "%d %d\n", freq_A, freq_B);
 
     fclose(file_ptr);
 }
@@ -107,7 +135,7 @@ void catSetFreq(long f) {
 
 #if defined (DEBUG)
     // debug
-    printf("Set frequency\n");
+    printf("Set frequency ");
 #endif
     
     if (vfoAActive) {
@@ -146,7 +174,7 @@ long catGetFreq() {
     
     #if defined (DEBUG)
     // debug
-   printf("Asked for freq\n", freq);
+   printf("Asked for frequency ", freq);
     #endif
 
 
@@ -154,13 +182,13 @@ long catGetFreq() {
         freq = freqA;
 #if defined (DEBUG)
     // debug
-        printf("Returned VFO A freq: %d\n", freqA);
+        printf("returned VFO A freq: %d\n", freqA);
 #endif
     } else {
         freq = freqB;
 #if defined (DEBUG)
     // debug
-        printf("Returned VFO B freq: %d\n", freqB);
+        printf("returned VFO B freq: %d\n", freqB);
 #endif        
     }
 
@@ -174,7 +202,7 @@ uint8_t catGetMode() {
 
     #if defined (DEBUG)
     // debug
-    printf("Asked for mode, returned %d\n", mode);
+    printf("Requested mode, returned %d\n", mode);
     #endif
 
     // pass it away
@@ -189,7 +217,7 @@ uint8_t catGetSMeter() {
 
     #if defined (DEBUG)
     // debug
-    printf("Asked for S meter\n");
+    printf("Asked for S meter returned 4\n");
     #endif
 
     // pass it away (fixed here just for testing)
@@ -213,7 +241,7 @@ uint8_t catGetTXStatus() {
 
     #if defined (DEBUG)
     // debug
-     printf("Asked for TX status\n");
+     printf("Asked for TX status ");
     #endif
 
     // you have to craft the byte from your data, we will built it from
@@ -224,7 +252,7 @@ uint8_t catGetTXStatus() {
 //    printf("Send: %x\n", (ptt==false)*128 + (splitActive==false)*32 + 8);
 //    r = ptt<<7 + splitActive<<5 + 8;
     r = (ptt==false)*128 + (splitActive==false)*32 + 8;
-    printf("Sending %x \n",r);
+    printf("returned %x \n",r);
 
     return r;
 }

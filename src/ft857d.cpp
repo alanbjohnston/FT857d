@@ -31,6 +31,10 @@
  *
  * **************************************************************************/
 
+/*
+ * updated by Alan Johnston, KU2Y to run on a Raspberry Pi using socat serial /tmp/vttyA with wiringPi
+ */
+
 //#include "Arduino.h"
 #include <wiringPi.h>
 #include <wiringSerial.h>

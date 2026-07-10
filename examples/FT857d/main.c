@@ -138,7 +138,7 @@ void read_frequency() {
 	else if (freqB < 144000000)
 		freqB = 434600000;
     else 
-        freqB = freqB;
+        freqB = freq_B;
     
     if ((freqA != freq_A) || (freqB != freq_B)) {
         printf("Frequency out of bounds error!\n");

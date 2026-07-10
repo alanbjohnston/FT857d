@@ -113,7 +113,7 @@ void read_frequency() {
         printf("Error opening frequency.txt file!\n");		
         return;
     } else {
-		    fscanf(file_ptr, "%d %d\n", freq_A, freq_B);
+		    fscanf(file_ptr, "%d %d\n", &freq_A, &freq_B);
 		 	printf("Read vfoA: %d vfoB: %d from frequency.txt\n", freq_A, freq_B);
 	}
 	fclose(file_ptr);

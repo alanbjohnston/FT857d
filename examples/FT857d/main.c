@@ -74,7 +74,7 @@ void update_frequency() {
     file_ptr = fopen("/home/pi/CubeSatSim/frequency.txt", "w");
 
     if (file_ptr == NULL) {
-        printf("Error opening file!\n");
+        printf("Error opening frequency.txt file!\n");
         return;
     }
 
@@ -103,6 +103,44 @@ void update_frequency() {
 
     fclose(file_ptr);
 }
+
+void read_frequency() {
+
+    int freq_A, freq_B;
+    file_ptr = fopen("/home/pi/CubeSatSim/frequency.txt", "r");
+
+    if (file_ptr == NULL) {
+        printf("Error opening frequency.txt file!\n");		
+        return;
+    } else {
+		    fscanf(file_ptr, "%d %d\n", freq_A, freq_B);
+		 	printf("Read vfoA: %d vfoB: %d from frequency.txt\n", freq_A, freq_B);
+	}
+	fclose(file_ptr);
+
+	if (freq_A > 450000000)
+		freqA = 435200000;
+	else if ((freq_A < 420000000) && (freq_A > 148000000))
+		freqA = 434700000;
+	else if (freq_A < 144000000)
+		freqA = 434600000;
+    else 
+        freqA = freq_A;
+
+    if (freq_B > 450000000)
+		freqB = 435200000;
+	else if ((freq_B < 420000000) && (freq_B > 148000000))
+		freqB = 434700000;
+	else if (freqB < 144000000)
+		freqB = 434600000;
+    else 
+        freqB = freqB;
+    
+    if ((freqA != freq_A) || (freqB != freq_B))
+        printf("Frequency out of bounds error!\n");
+         
+}
+
 
 // function to run when we must put radio on TX/RX
 void catGoPtt(bool pttf) {
@@ -259,6 +297,9 @@ uint8_t catGetTXStatus() {
 
 
 void setup() {
+
+    read_frequency();
+	
     // preload the vars in the cat library
     radio.addCATPtt(catGoPtt);
     radio.addCATAB(catGoToggleVFOs);

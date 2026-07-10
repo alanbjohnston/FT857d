@@ -75,6 +75,7 @@ void update_frequency() {
 
     if (file_ptr == NULL) {
         printf("Error opening frequency.txt file!\n");
+		fflush(stdout);
         return;
     }
 
@@ -96,9 +97,10 @@ void update_frequency() {
     else 
         freq_B = freqB;
     
-    if ((freqA != freq_A) || (freqB != freq_B))
+    if ((freqA != freq_A) || (freqB != freq_B)) {
         printf("Frequency out of bounds error!\n");
-         
+		fflush(stdout);
+	}
     fprintf(file_ptr, "%d %d\n", freq_A, freq_B);
 
     fclose(file_ptr);
@@ -111,10 +113,12 @@ void read_frequency() {
 
     if (file_ptr == NULL) {
         printf("Error opening frequency.txt file!\n");		
+		fflush(stdout);
         return;
     } else {
 		    fscanf(file_ptr, "%d %d\n", &freq_A, &freq_B);
-		 	printf("Read vfoA: %d vfoB: %d from frequency.txt\n", freq_A, freq_B);
+		 	printf("Read VFO A: %d VFO B: %d from frequency.txt\n", freq_A, freq_B);
+			fflush(stdout);
 	}
 	fclose(file_ptr);
 
@@ -136,9 +140,10 @@ void read_frequency() {
     else 
         freqB = freqB;
     
-    if ((freqA != freq_A) || (freqB != freq_B))
+    if ((freqA != freq_A) || (freqB != freq_B)) {
         printf("Frequency out of bounds error!\n");
-         
+		fflush(stdout);
+	}
 }
 
 
@@ -150,6 +155,7 @@ void catGoPtt(bool pttf) {
     #if defined (DEBUG)
     // debug
     printf("PTT Status is: %d\n", ptt);
+	fflush(stdout);
     #endif
 }
 
@@ -164,6 +170,7 @@ void catGoToggleVFOs() {
          printf("VFO A active\n");
      else
          printf("VFO B active\n");
+	fflush(stdout);
     #endif
 }
 
@@ -189,6 +196,7 @@ void catSetFreq(long f) {
         printf("VFO B freq is now: %d\n", freqB);
 #endif        
     }
+	fflush(stdout);
 
     update_frequency();
 
@@ -202,6 +210,7 @@ void catSetMode(uint8_t m) {
     #if defined (DEBUG)
     // debug
     printf("Active VFO mode is: %d\n", mode);
+	fflush(stdout);
     #endif
 }
 
@@ -212,7 +221,8 @@ long catGetFreq() {
     
     #if defined (DEBUG)
     // debug
-   printf("Asked for frequency ", freq);
+   	printf("Asked for frequency ", freq);
+	fflush(stdout);
     #endif
 
 
@@ -229,7 +239,7 @@ long catGetFreq() {
         printf("returned VFO B freq: %d\n", freqB);
 #endif        
     }
-
+	fflush(stdout);
     // pass it away
     return freq;
 }
@@ -241,6 +251,7 @@ uint8_t catGetMode() {
     #if defined (DEBUG)
     // debug
     printf("Requested mode, returned %d\n", mode);
+	fflush(stdout);
     #endif
 
     // pass it away
@@ -256,6 +267,7 @@ uint8_t catGetSMeter() {
     #if defined (DEBUG)
     // debug
     printf("Asked for S meter returned 4\n");
+	fflush(stdout);
     #endif
 
     // pass it away (fixed here just for testing)
@@ -279,7 +291,7 @@ uint8_t catGetTXStatus() {
 
     #if defined (DEBUG)
     // debug
-     printf("Asked for TX status ");
+    printf("Asked for TX status ");
     #endif
 
     // you have to craft the byte from your data, we will built it from
@@ -291,7 +303,8 @@ uint8_t catGetTXStatus() {
 //    r = ptt<<7 + splitActive<<5 + 8;
     r = (ptt==false)*128 + (splitActive==false)*32 + 8;
     printf("returned %x \n",r);
-
+	fflush(stdout);
+	
     return r;
 }
 
@@ -316,7 +329,8 @@ void setup() {
 
     #if defined (DEBUG)
     // serial welcome
-     printf("FT857 emulation setup complete\n");
+    printf("FT857 emulation setup complete\n");
+	fflush(stdout);
     #endif
 //    sleep(1);
 

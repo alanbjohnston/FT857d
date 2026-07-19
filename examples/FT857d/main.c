@@ -68,6 +68,11 @@ FILE *file_ptr;
 // DEBUG flag, uncomment it if you want to test it by hand
 #define DEBUG true
 
+void write_frequency() {
+
+
+}
+
 void update_frequency() {
 
     int freq_A, freq_B;
@@ -101,7 +106,12 @@ void update_frequency() {
         printf("Frequency out of bounds error!\n");
 		fflush(stdout);
 	}
-    fprintf(file_ptr, "%d %d\n", freq_A, freq_B);
+
+	if (vfoAActive)
+    	fprintf(file_ptr, "%d %d\n", freq_A, freq_B);
+	else
+    	fprintf(file_ptr, "%d %d\n", freq_B, freq_A);
+		
 
     fclose(file_ptr);
 }

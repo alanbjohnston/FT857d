@@ -1,3 +1,23 @@
+# FT-857D CAT control for Raspberry Pi
+
+Arduino code modified Alan Johnston, KU2Y in branch pi
+
+To compile:
+
+       sudo apt-get install -y libhamlib-utils socat gpredict
+       git clone https://github.com/alanbjohnston/FT857d.git
+       cd FT857d
+       git checkout pi	
+       cd examples/FT857d	
+       g++ main.c ../../src/ft857d.cpp -lwiringPi -o ft857d
+       
+Test:
+
+       ./ft857d
+       
+Used by CubeSatSim for Doppler frequency control https://github.com/alanbjohnston/CubeSatSim/tree/master-bf
+
+
 # FT-857D CAT control for Arduino (FT857d) #
 
 This library give support to any sketch to act as a Yaesu FT-857D radio once you configure it correctly.

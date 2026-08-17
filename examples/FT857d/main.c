@@ -38,7 +38,7 @@
 
 /*
  * converted to run on Raspberry Pi by Alan Johnston, KU2Y
- * writes VFO A and B frequencies to file /home/pi/CubeSatSim/frequency.txt 
+ * writes VFO A and B frequencies to file /home/pi/CubeSatSim/freq.txt 
  * checks to make sure in amateur radio 2m or 70cm band
 */
 
@@ -76,10 +76,10 @@ void write_frequency() {
 void update_frequency() {
 
     int freq_A, freq_B;
-    file_ptr = fopen("/home/pi/CubeSatSim/frequency.txt", "w");
+    file_ptr = fopen("/home/pi/CubeSatSim/freq.txt", "w");
 
     if (file_ptr == NULL) {
-        printf("Error opening frequency.txt file!\n");
+        printf("Error opening freq.txt file!\n");
 		fflush(stdout);
         return;
     }
@@ -119,15 +119,15 @@ void update_frequency() {
 void read_frequency() {
 
     int freq_A, freq_B;
-    file_ptr = fopen("/home/pi/CubeSatSim/frequency.txt", "r");
+    file_ptr = fopen("/home/pi/CubeSatSim/freq.txt", "r");
 
     if (file_ptr == NULL) {
-        printf("Error opening frequency.txt file!\n");		
+        printf("Error opening freq.txt file!\n");		
 		fflush(stdout);
         return;
     } else {
 		    fscanf(file_ptr, "%d %d\n", &freq_A, &freq_B);
-		 	printf("Read VFO A: %d VFO B: %d from frequency.txt\n", freq_A, freq_B);
+		 	printf("Read VFO A: %d VFO B: %d from freq.txt\n", freq_A, freq_B);
 			fflush(stdout);
 	}
 	fclose(file_ptr);

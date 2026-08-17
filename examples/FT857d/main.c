@@ -351,7 +351,7 @@ int main() {
     setup();
     while(1) {
         radio.check();
-        sleep(0.1);
+//        sleep(0.1);   // rely on CPU quota to not use 100% cpu
 //        printf("Radio Checked ");
     }
 }

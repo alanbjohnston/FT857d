@@ -83,7 +83,7 @@ void update_frequency() {
 		fflush(stdout);
         return;
     }
-
+/*
 	if (freqA > 450000000)
 		freq_A = 435200000;
 	else if ((freqA < 420000000) && (freqA > 148000000))
@@ -106,13 +106,14 @@ void update_frequency() {
         printf("Frequency out of bounds error!\n");
 		fflush(stdout);
 	}
-
+*/	
+	freq_A = freqA;
+	freq_B = freqB;
 	if (vfoAActive)
     	fprintf(file_ptr, "%d %d\n", freq_A, freq_B);
 	else
     	fprintf(file_ptr, "%d %d\n", freq_B, freq_A);
 		
-
     fclose(file_ptr);
 }
 
